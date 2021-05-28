@@ -364,6 +364,7 @@ func (d *Driver) StartTask(cfg *drivers.TaskConfig) (*drivers.TaskHandle, *drive
 	cfg.Env = taskenv.SetPortMapEnvs(cfg.Env, driverConfig.PortMap)
 
 	// Basic config options
+	createOpts.ContainerBasicConfig.Pod = driverConfig.Pod
 	createOpts.ContainerBasicConfig.Name = containerName
 	createOpts.ContainerBasicConfig.Command = allArgs
 	createOpts.ContainerBasicConfig.Env = cfg.Env
@@ -459,6 +460,9 @@ func (d *Driver) StartTask(cfg *drivers.TaskConfig) (*drivers.TaskHandle, *drive
 		} else if strings.HasPrefix(driverConfig.NetworkMode, "container:") {
 			createOpts.ContainerNetworkConfig.NetNS.NSMode = api.FromContainer
 			createOpts.ContainerNetworkConfig.NetNS.Value = strings.TrimPrefix(driverConfig.NetworkMode, "container:")
+		} else if driverConfig.NetworkMode == "pod" {
+			createOpts.ContainerNetworkConfig.NetNS.NSMode = api.FromPod
+			createOpts.ContainerNetworkConfig.NetNS.Value = driverConfig.Pod
 		} else {
 			return nil, nil, fmt.Errorf("Unknown/Unsupported network mode: %s", driverConfig.NetworkMode)
 		}

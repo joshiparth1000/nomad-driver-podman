@@ -94,6 +94,7 @@ type PluginConfig struct {
 
 // TaskConfig is the driver configuration of a task within a job
 type TaskConfig struct {
+	Pod               string             `codec:"pod"`
 	Args              []string           `codec:"args"`
 	Auth              AuthConfig         `codec:"auth"`
 	Ports             []string           `codec:"ports"`
