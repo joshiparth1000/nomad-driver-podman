@@ -561,8 +561,6 @@ type Namespace struct {
 // InspectContainerConfig holds further data about how a container was initially
 // configured.
 type InspectContainerConfig struct {
-	// Container pod
-	Pod string `json:"Pod"`
 	// Container hostname
 	Hostname string `json:"Hostname"`
 	// Container domain name - unused at present
