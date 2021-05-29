@@ -13,10 +13,11 @@ job "redis" {
         foo = "bar"
       }
       config {
+        pod = "quizzical_swartz"
         image = "docker://redis"
-        ports = ["redis"]
-        network_mode = "bridge"
-        cni_networks = ["internal", "web"]
+        #ports = ["redis"]
+        network_mode = "pod"
+        #cni_networks = ["internal", "web"]
       }
     }
   }
