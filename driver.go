@@ -1009,7 +1009,7 @@ func (d *Driver) portMappings(taskCfg *drivers.TaskConfig, driverCfg TaskConfig)
 		return nil, fmt.Errorf("Trying to map ports but no network interface is available")
 	}
 
-	if taskCfg.Resources.Ports == nil && len(driverCfg.Ports) > 0 && driverCfg.NetworkMode != "pod" {
+	if taskCfg.Resources.Ports == nil && len(driverCfg.Ports) > 0 {
 		return nil, errors.New("No ports defined in network stanza")
 	}
 
